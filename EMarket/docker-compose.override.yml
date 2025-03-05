@@ -1,0 +1,35 @@
+services:
+  catalog.db:
+    image: postgres:latest
+    container_name: catalog.db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=catalog_db
+    ports:
+      - "5432:5432"
+    restart: always 
+    volumes:
+      - pgdata:/var/lib/postgresql/data 
+
+  pgAdmin:
+    image: dpage/pgadmin4
+    container_name: pgAdmin
+    restart: always
+    ports:
+      - "5050:80" 
+    environment: 
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+ 
+  catalog.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ConnectionStrings__Database=Server=catalog.db;Port=5432;Database=catalog_db;Username=postgres;Password=postgres;Include Error Detail=true
+    depends_on:
+      - catalog.db
+    ports:
+      - "6000:8080"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
