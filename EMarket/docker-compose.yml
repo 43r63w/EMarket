@@ -6,42 +6,23 @@ services:
       dockerfile: src/Catalog.Api/Dockerfile
     ports:
       - "6000:8080"
-    networks:
-      - catalog_network 
-
+  
   catalog.db:
     image: postgres:latest
-    container_name: catalog.db
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=catalog_db
-    ports:
-      - "5432:5432"
-    restart: always 
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-    networks:
-      - catalog_network 
-
+   
+  basket.db:
+    image: postgres:latest
+  
+  redis.cache:
+    image: redis
+ 
   pgAdmin:
     image: dpage/pgadmin4
-    container_name: pgAdmin
-    restart: always
-    ports:
-      - "5050:80" 
-    environment: 
-      PGADMIN_DEFAULT_EMAIL: admin@admin.com
-      PGADMIN_DEFAULT_PASSWORD: root
-    networks:
-      - catalog_network 
+  
+   
  
-networks:
-  catalog_network:  
-    driver: bridge
-
-
 volumes:
   pgdata:
     driver: local
+  basket_data:
  
