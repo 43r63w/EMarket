@@ -11,35 +11,17 @@ services:
     restart: always 
     volumes:
       - pgdata:/var/lib/postgresql/data 
-  
-  basket.db:
-    image: postgres:latest
-    container_name: basket.db
-    environment:
-     - POSTGRES_USER=postgres
-     - POSTGRES_PASSWORD=postgres
-     - POSTGRES_DB=basket_db
-    ports:
-     - "5433:5432"
-    volumes:
-     - "basket_data:/var/lib/postgresql/data"
-
-  redis.cache:
-    container_name: redis.cache
-    restart: always
-    ports:
-     - "6379:6379"
 
   pgAdmin:
     image: dpage/pgadmin4
     container_name: pgAdmin
-   # restart: always
+    restart: always
     ports:
       - "5050:80" 
     environment: 
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: root
-
+ 
   catalog.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -51,6 +33,3 @@ services:
       - "6000:8080"
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
-  
- 
-    
