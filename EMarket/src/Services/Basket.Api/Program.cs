@@ -3,6 +3,9 @@ using Basket.Api.Models;
 using BuildingBlocks.Behaviors;
 using BuildingBlocks.Exceptions.Handlres;
 using System.Reflection;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Newtonsoft.Json;
+using HealthChecks.UI.Client;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,7 +42,10 @@ app.UseExceptionHandler(opt => { });
 
 app.MapCarter();
 
+app.MapHealthChecks("/health", new HealthCheckOptions
+{
+    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+});
+
 
 app.Run();
-
-

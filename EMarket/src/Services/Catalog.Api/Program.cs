@@ -5,7 +5,6 @@ using Weasel.Core;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
 builder.Services.AddOpenApi();
 
 builder.Services
@@ -35,7 +34,7 @@ app.MapCarter();
 
 app.UseExceptionHandler(opt => { });
 
-app.MapHealthChecks("/health",new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions
+app.MapHealthChecks("/health", new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions
 {
     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
 });
