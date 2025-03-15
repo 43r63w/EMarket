@@ -24,6 +24,8 @@ builder.Services.AddMarten(options =>
 
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
+builder.Services.AddValidationSchema();
+
 
 builder.Services.AddCarter();
 
