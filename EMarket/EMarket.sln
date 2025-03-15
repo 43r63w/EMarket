@@ -12,6 +12,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildingBlocks", "src\BuildingBlocks\BuildingBlocks\BuildingBlocks.csproj", "{88DAF368-C25A-4358-847C-2C4430E24A67}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{87D0F5B6-8F76-4642-BB7E-FA90E86E1DB9}"
+	ProjectSection(SolutionItems) = preProject
+		workflow.yml = workflow.yml
+	EndProjectSection
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{149A15EC-B7D4-46BE-BA28-192A917BBAED}"
 EndProject
@@ -53,5 +56,8 @@ Global
 		{59F7E2CA-331B-4859-9827-22EB5F5B78F6} = {4BF33B0C-17AC-4461-8883-3DC66DD73C29}
 		{B9C38A01-DDA1-4A9F-A8AE-1B4B4A5FBF72} = {59F7E2CA-331B-4859-9827-22EB5F5B78F6}
 		{39821159-A01F-46DF-A633-A6223D8564E5} = {B7CBD0EA-16A5-45FE-A228-4D3819CF36A1}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7769DB64-F848-4A5D-8BBF-6FBA237A41A8}
 	EndGlobalSection
 EndGlobal
