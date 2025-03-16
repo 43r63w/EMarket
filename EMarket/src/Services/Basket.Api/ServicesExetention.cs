@@ -8,6 +8,7 @@ namespace Basket.Api;
 public static class ServicesExetention
 {
     public const string DATABASE = "Database";
+    public const string REDIS = "Redis";
     public static Assembly ASSEMBLY = typeof(ServicesExetention).Assembly;
     public static IServiceCollection AddMarten(
         this IServiceCollection services,
@@ -38,9 +39,20 @@ public static class ServicesExetention
         services.AddScoped<IBasketRepository, BasketRepository>();
         services.AddStackExchangeRedisCache(options =>
         {
-            options.Configuration = configuration.GetConnectionString("Redis")!;
+            options.Configuration = configuration.GetConnectionString(REDIS)!;
             options.InstanceName = "Basket";
         });
+
+        return services;
+    }
+
+    public static IServiceCollection AddHealthChecker(
+        this IServiceCollection services,
+        IConfiguration configuration)
+    {
+        services.AddHealthChecks()
+            .AddNpgSql(configuration.GetConnectionString(DATABASE)!)
+            .AddRedis(REDIS); 
 
         return services;
     }

@@ -19,10 +19,15 @@ services:
   pgAdmin:
     image: dpage/pgadmin4
   
-   
- 
+  basket.api:
+    image: ${DOCKER_REGISTRY-}basketapi
+    build:
+      context: .
+      dockerfile: src/Services/Basket.Api/Dockerfile
+
 volumes:
   pgdata:
     driver: local
   basket_data:
  
+

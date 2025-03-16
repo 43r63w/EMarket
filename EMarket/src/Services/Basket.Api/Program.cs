@@ -2,6 +2,7 @@ using Basket.Api;
 using Basket.Api.Models;
 using BuildingBlocks.Behaviors;
 using BuildingBlocks.Exceptions.Handlres;
+using HealthChecks.UI.Client;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,6 +30,9 @@ builder.Services.AddValidaitonSchema();
 
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
+builder.Services.AddHealthChecker(builder.Configuration);
+
+
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
@@ -39,6 +43,10 @@ app.UseExceptionHandler(opt => { });
 
 app.MapCarter();
 
+app.MapHealthChecks("/health", new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions
+{
+    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+});
 
 app.Run();
 

@@ -6,3 +6,4 @@ global using Catalog.Api.Models;
 global using FluentValidation;
 global using Marten.Pagination;
 global using MediatR;
+global using Mapster;
