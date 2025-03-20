@@ -1,6 +1,7 @@
 ﻿using Basket.Api.Basket.CreateBasket;
 using Basket.Api.Data;
 using Basket.Api.Models;
+using Discount.Grpc;
 using System.Reflection;
 
 namespace Basket.Api;
@@ -54,6 +55,12 @@ public static class ServicesExetention
             .AddNpgSql(configuration.GetConnectionString(DATABASE)!)
             .AddRedis(REDIS); 
 
+        return services;
+    }
+
+    public static IServiceCollection AddServices(this IServiceCollection services)
+    {
+        services.AddScoped(typeof(DiscountProtoService.DiscountProtoServiceClient));
         return services;
     }
 }

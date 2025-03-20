@@ -25,9 +25,16 @@ services:
       context: .
       dockerfile: src/Services/Basket.Api/Dockerfile
 
+  discount.grpc:
+    image: ${DOCKER_REGISTRY-}discountgrpc
+    build:
+      context: .
+      dockerfile: src/Services/Discount.Grpc/Dockerfile
+
 volumes:
   pgdata:
     driver: local
   basket_data:
  
+
 
