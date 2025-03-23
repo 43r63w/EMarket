@@ -1,7 +1,4 @@
-﻿using Mapster;
-using MediatR;
-
-namespace Catalog.Api.Products.CreateProduct;
+﻿namespace Catalog.Api.Products.CreateProduct;
 
 internal sealed record CreateProductRequest(string Name,
     string Description,
@@ -10,7 +7,6 @@ internal sealed record CreateProductRequest(string Name,
     decimal Price);
 
 internal sealed record CreateProductResult(Guid Id);
-
 
 public sealed class CreateProductEndpoint : ICarterModule
 {
