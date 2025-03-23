@@ -32,6 +32,8 @@ builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
 builder.Services.AddHealthChecker(builder.Configuration);
 
+builder.Services.AddGrpcClient(builder.Configuration);
+
 
 builder.Services.AddOpenApi();
 

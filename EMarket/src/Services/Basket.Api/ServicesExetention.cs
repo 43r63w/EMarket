@@ -29,7 +29,6 @@ public static class ServicesExetention
         services.AddTransient<IValidator<StoreBasketCommand>, StoreBasketCommandValidator>();
 
         services.AddValidatorsFromAssemblyContaining<StoreBasketCommandValidator>();
-
         return services;
     }
 
@@ -63,4 +62,15 @@ public static class ServicesExetention
         services.AddScoped(typeof(DiscountProtoService.DiscountProtoServiceClient));
         return services;
     }
+
+    public static IServiceCollection AddGrpcClient(this IServiceCollection services,IConfiguration configuration)
+    {
+        services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(options =>
+        {
+            options.Address = new Uri(configuration["GrpcSettings:DiscountUrl"]!);
+        });
+
+        return services;
+    }
+
 }

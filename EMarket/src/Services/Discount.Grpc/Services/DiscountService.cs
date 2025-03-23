@@ -37,17 +37,19 @@ public class DiscountService : DiscountProtoService.DiscountProtoServiceBase
         GetDiscountRequest request,
         ServerCallContext context)
     {
-        var coupon = await _dbContext.Coupons.FirstOrDefaultAsync(e => e.ProductName == request.ProductName);
-
+        var coupon = await _dbContext.Coupons
+            .AsNoTracking()
+            .FirstOrDefaultAsync(e => e.ProductName == request.ProductName);
+            
         return coupon is null
-            ? new CouponModel { ProductName = "No Discount", Amount = 0, Description = string.Empty }
-            : Mapper.ToModel(coupon);
+                 ? new CouponModel { ProductName = "No Discount", Amount = 0, Description = string.Empty }
+                 : Mapper.ToModel(coupon);
 
     }
 
     public override async Task<DeleteDiscountResponse> DeleteDiscount(
         DeleteDiscountRequest request,
-        ServerCallContext context)      
+        ServerCallContext context)
     {
         var result = await _dbContext.Coupons.Where(e => e.ProductName == request.ProductName).ExecuteDeleteAsync();
         return result == 1
@@ -59,7 +61,7 @@ public class DiscountService : DiscountProtoService.DiscountProtoServiceBase
         UpdateDiscountRequest request,
         ServerCallContext context)
     {
-        _dbContext.Coupons.ExecuteUpdate(
+        _dbContext.Coupons.Where(e => e.ProductName == request.Coupon.ProductName).ExecuteUpdate(
             amount => amount
             .SetProperty(e => e.Amount, request.Coupon.Amount)
             .SetProperty(e => e.Description, request.Coupon.Description));

@@ -1,5 +1,4 @@
 ﻿using Discount.Grpc.Data;
-using Microsoft.EntityFrameworkCore;
 
 namespace Discount.Grpc.RequestPipline;
 

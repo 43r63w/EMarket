@@ -11,4 +11,6 @@ public class Item
     public string Color { get; set; } = default!;
 
     public decimal Price { get; set; }
+
+    public bool IsDiscount { get; set; }
 }

@@ -54,6 +54,7 @@ internal sealed class StoreBasketCommandHandler : ICommandHandler<StoreBasketCom
                 cancellationToken: cancellationToken);
 
             item.Price -= coupon.Amount;
+            item.IsDiscount = true;
         }
     }
 }
